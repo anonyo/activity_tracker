@@ -1,49 +1,23 @@
-= form_for @activity do |f|
-  .row
-    .large-12.columns
-      %label
-        Select type
-        = f.select :category_title,
-          Category.all.map { |p| [ p.name.to_s, p.name ] },
-          include_blank: true
-      %label
-        Start Time
-        = f.time_select :start_time,
-              combined: true,
-              default: Time.zone.now,
-              minute_interval: 1,
-              time_separator: ""
-      %label
-        End Time
-        = f.time_select :end_time,
-              combined: true,
-              default: Time.zone.now + 30.minutes,
-              minute_interval: 1,
-              time_separator: ""
-
-      %label
-        Notes
-        = f.text_area :note
-        = f.submit 'Send', class: 'button expand'
-
-      %h4 Activity
-      %table
-        %thead
-          %tr
-            %th{:width => "200"} Activity Type
-            %th{:width => "200"} Time started
-            %th{:width => "150"} Time Ended
-            %th{:width => "150"} Notes
-            %th{:width => "150"} Edit
-            %th{:width => "150"} Delete
-        %tbody
-        - @activities.each do |activity|
-          %tr
-            %td= activity.category_title
-            %td= activity.start_time.to_formatted_s( format = :short)
-            %td= activity.end_time.to_formatted_s( format = :short)
-            %td= activity.note
-            %td= link_to 'Edit', edit_activity_path(activity), class: 'button alert'
-            %td= link_to 'Destroy', activity_path(activity), method: :delete, class: 'button alert'
+.row
+  .large-12.columns
+    %h4 Activity
+    %table
+      %thead
+        %tr
+          %th{:width => "200"} Activity Type
+          %th{:width => "200"} Time started
+          %th{:width => "150"} Time Ended
+          %th{:width => "100"} Notes
+          %th{:width => "150"} Edit
+          %th{:width => "150"} Delete
+      %tbody
+      - @activities.each do |activity|
+        %tr
+          %td= activity.category_title
+          %td= activity.start_time.to_formatted_s( format = :short)
+          %td= activity.end_time.to_formatted_s( format = :short)
+          %td= activity.note
+          %td= link_to 'Edit', edit_activity_path(activity), class: 'button alert'
+          %td= link_to 'Destroy', activity_path(activity), method: :delete, class: 'button alert'
 
 
