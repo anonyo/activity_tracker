@@ -50,4 +50,9 @@ class ActivitiesController < ApplicationController
   def activity_params
     params.require(:activity).permit(:start_time, :end_time, :note)
   end
+
+  def activity_count_today(type)
+    Activity.by_date_and_category(Time.zone.now.beginning_of_day, type).count
+  end
+  helper_method :activity_count_today
 end

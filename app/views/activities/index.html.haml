@@ -1,9 +1,9 @@
 .row
   .large-12.columns
     %h4 Todays Activity
-    %h5= "Breast milk: #{Activity.by_date_and_category(Time.zone.now.beginning_of_day, 'Breast Milk').count}"
-    %h5= "Diaper changes - pee: #{Activity.by_date_and_category(Time.zone.now.beginning_of_day, 'Diaper Change - Pee').count}"
-    %h5= "Diaper changes - poop: #{Activity.by_date_and_category(Time.zone.now.beginning_of_day, 'Diaper Change - Poop').count}"
+    %h5= "Breast milk: #{activity_count_today 'Breast Milk'}"
+    %h5= "Diaper changes - pee: #{activity_count_today 'Diaper Change - Pee'}"
+    %h5= "Diaper changes - poop: #{activity_count_today 'Diaper Change - Poop'}"
     %h4 All Activity
     %table
       %thead
