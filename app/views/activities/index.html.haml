@@ -19,7 +19,10 @@
         %tr
           %td= activity.category_title
           %td= activity.start_time.to_formatted_s( format = :short)
-          %td= activity.end_time.to_formatted_s( format = :short)
+          - if activity.category_title.include? "Diaper"
+            %td="Not applicable"
+          - else
+            %td= activity.end_time.to_formatted_s( format = :short)
           %td= activity.note
           %td= link_to 'Edit', edit_activity_path(activity), class: 'button alert'
           %td= link_to 'Destroy', activity_path(activity), method: :delete, class: 'button alert'
