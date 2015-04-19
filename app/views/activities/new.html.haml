@@ -8,7 +8,6 @@
           %th{:width => "200"} Activity Type
           %th{:width => "200"} Time started
           %th{:width => "150"} Time Ended
-          %th{:width => "100"} Notes
       %tbody
       - @activities.each do |activity|
         %tr
@@ -18,4 +17,3 @@
             %td="Not applicable"
           - else
             %td= activity.end_time.to_formatted_s( format = :short)
-          %td= activity.note
