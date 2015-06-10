@@ -25,15 +25,8 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    start_time = params[:activity].parse_time_select! :start_time
-    end_time = params[:activity].parse_time_select! :end_time
-    Activity.new.tap do |a|
-      a.note = params[:activity][:note]
-      a.start_time = start_time[:start_time]
-      a.end_time = end_time[:end_time]
-      a.category_title = params[:activity][:category_title]
-      a.save
-    end
+    activity = ActivityCreator.new(params[:activity])
+    activity.process
     redirect_to :back, flash: { success: "Activity Created" }
   end
 
