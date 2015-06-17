@@ -10,4 +10,16 @@ RSpec.describe ActivitiesController, type: :controller do
     get :index
     expect(response).to render_template("index")
   end
+  describe "POST #create" do
+    it "creates new activity" do
+      setup
+      expect(Activity.count).to eq 1
+    end
+  end
+  private
+  def setup
+    Activity.destroy_all
+    @request.env['HTTP_REFERER'] = '/activity/new'
+    post :create, activity: { category_title: 'Breast Pump', note: 'some note' }
+  end
 end
